@@ -313,7 +313,7 @@ importers:
         specifier: ^14.0.0
         version: 14.0.1(stylelint@15.11.0(typescript@5.9.3))
       tar:
-        specifier: ^6.1.2
+        specifier: 6.2.1
         version: 6.2.1
       ts-jest:
         specifier: ^29.4.6
