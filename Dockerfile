@@ -1,4 +1,7 @@
-ARG NODE_IMAGE_VERSION="22-alpine"
+# Release is patch-pinned; registry returned an empty OCI index during validation.
+# HOLD container release until this tag resolves for the target architecture and
+# node --version inside the resulting image confirms v24.22.1.
+ARG NODE_IMAGE_VERSION="24.22.1-alpine"
 
 # Install dependencies only when needed
 FROM node:${NODE_IMAGE_VERSION} AS deps
