@@ -1,6 +1,5 @@
-# Release is patch-pinned; registry returned an empty OCI index during validation.
-# HOLD container release until this tag resolves for the target architecture and
-# node --version inside the resulting image confirms v24.22.1.
+# Patch-pinned Node 24.22.1. Verified 2026-10-24: official index has linux/amd64 and
+# linux/arm64 manifests; image node --version = v24.22.1 (Undici 7.30.1).
 ARG NODE_IMAGE_VERSION="24.22.1-alpine"
 
 # Install dependencies only when needed
