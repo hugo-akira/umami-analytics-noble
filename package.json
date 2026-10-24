@@ -10,17 +10,17 @@
     "url": "https://github.com/umami-software/umami.git"
   },
   "engines": {
-    "node": "20.x"
+    "node": "24.x"
   },
   "type": "module",
   "scripts": {
-    "dev": "next dev -p 3001 --turbo",
-    "build": "npm-run-all check-env build-db check-db build-tracker build-geo build-app",
-    "start": "next start",
-    "build-docker": "npm-run-all build-db build-tracker build-geo build-app",
+    "dev": "node scripts/check-node-version.cjs && next dev -p 3001 --turbo",
+    "build": "node scripts/check-node-version.cjs && npm-run-all check-env build-db check-db build-tracker build-geo build-app",
+    "start": "node scripts/check-node-version.cjs && next start",
+    "build-docker": "node scripts/check-node-version.cjs && npm-run-all build-db build-tracker build-geo build-app",
     "start-docker": "npm-run-all check-db update-tracker start-server",
     "start-env": "node scripts/start-env.js",
-    "start-server": "node server.js",
+    "start-server": "node scripts/check-node-version.cjs && node server.js",
     "build-app": "next build --turbo",
     "build-icons": "svgr ./src/assets --out-dir src/components/svg --typescript",
     "build-components": "tsup",
