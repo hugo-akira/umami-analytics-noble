@@ -4,7 +4,11 @@ describe('startup runtime observation', () => {
   });
 
   function loadRegister(runtime?: string) {
-    jest.replaceProperty(process, 'env', { NEXT_RUNTIME: runtime, SECRET: 'must-not-log' });
+    jest.replaceProperty(process, 'env', {
+      NODE_ENV: 'test',
+      NEXT_RUNTIME: runtime,
+      SECRET: 'must-not-log',
+    });
     let register: () => void;
     jest.isolateModules(() => {
       register = require('../instrumentation').register;
