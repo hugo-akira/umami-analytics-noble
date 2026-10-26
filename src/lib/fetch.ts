@@ -21,14 +21,27 @@ export async function request(
   body?: string,
   headers: object = {},
 ): Promise<FetchResponse> {
+  const requestHeaders = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    ...headers,
+  };
+  const runtime = (
+    globalThis as typeof globalThis & {
+      process?: { env?: Record<string, string | undefined> };
+    }
+  ).process?.env?.NEXT_RUNTIME;
+  let outboundHeaders: HeadersInit = requestHeaders;
+  if (runtime === 'nodejs') {
+    const normalized = new Headers(requestHeaders);
+    normalized.set('Accept-Encoding', 'gzip, deflate');
+    outboundHeaders = normalized;
+  }
+
   return fetch(url, {
     method,
     cache: 'no-cache',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      ...headers,
-    },
+    headers: outboundHeaders,
     body,
   }).then(async res => {
     const data = await res.json();
